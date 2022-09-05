@@ -33,6 +33,23 @@ namespace Full_GRASP_And_SOLID.Library
                 Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
+            
+            // Se le agrega al final de la impresión de la receta el costo total de producción.
+            Console.WriteLine($"Costo de producción: {this.GetProductionCost()}");
+
+        }
+
+        // Se le asigna la responsabilidad de calcular el costo total a la clase Recipe por el principio Expert.
+        public double GetProductionCost()
+        {
+            double result = 0;
+
+            foreach (Step step in this.steps)
+            {
+                result = result + step.StepCost();
+            }
+
+            return result;
         }
     }
 }
